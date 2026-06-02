@@ -34,7 +34,6 @@ layout{
 focus-ring{
 off
 }
-background-color "transparent"
 border{
 width 2
 active-color "#bdae93"
@@ -52,9 +51,6 @@ bottom 8
 window-rule{
 clip-to-geometry true
 open-maximized true
-}
-layer-rule{
-place-within-backdrop true
 }
 binds{
 Mod+Return{spawn "alacritty";}
@@ -121,7 +117,6 @@ Print{screenshot;}
 Ctrl+Alt+Delete{quit;}
 }
 screenshot-path "~/Imagens/Print de %Y-%m-%d %H-%M-%S.jpg"
-spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/mateus/Imagens/afina.png"
 spawn-at-startup "quickshell"
 spawn-at-startup "mako"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"

@@ -15,8 +15,6 @@ Meus arquivos de customização e scripts pensados para um fluxo de trabalho em 
 
 • Notificações: Mako
 
-• Wallpaper: Swaybg
-
 • Lockscreen: Swaylock
 
 • Idle listener: Swayidle
