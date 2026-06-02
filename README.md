@@ -15,8 +15,6 @@ Meus arquivos de customização e scripts pensados para um fluxo de trabalho em 
 
 • Lockscreen: Swaylock
 
-• Idle listener: Swayidle
-
 • Video player: MPV
 
 • Protetor de luz azul: Gammastep

@@ -18,7 +18,6 @@ packages=(
 "openssh"
 "quickshell"
 "rofi"
-"swayidle"
 "swaylock"
 "ttf-jetbrains-mono-nerd"
 "unzip"
