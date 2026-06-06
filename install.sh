@@ -25,7 +25,6 @@ packages=(
 "unzip"
 "upower"
 "which"
-"xdg-desktop-portal-wlr"
 "xwayland-satellite"
 "zip"
 )

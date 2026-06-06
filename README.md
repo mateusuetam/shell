@@ -1,5 +1,5 @@
 # Meus Dots
-Meus arquivos de customização e scripts pensados para um fluxo de trabalho em ambiente linux minimalista que se baseia no uso de window manager.
+Meus arquivos de customização e scripts pensados para um fluxo de trabalho em ambiente linux minimalista que se baseia no uso de window manager e quickshell.
 NOTA: As configs do SwayWM ainda não foram testadas no setup com o quickshell, é possível que haja problemas.
 
 📦 Pacotes utilizados
@@ -28,7 +28,25 @@ NOTA: As configs do SwayWM ainda não foram testadas no setup com o quickshell, 
 
 📜 Scripts e suas funções
 
-Adendo: os scripts utilizam do rofi para fornecer a interface gráfica e mandam notificações através do notify-send.
+• Install
+
+- Executa um comando de instalação de pacotes que são necessários para dar compatbilidade com o ambiente de trabalho e fornece ferramentas extras de desenvolvimento (só instala caso já não estejam instalados).
+
+- Cria links simbólicos entre as configurações e suas respectivas pastas esperadas em ".config".
+
+- Clona a repo dos plugins do neovim.
+
+• ClamAV
+
+- Pode realizar um scan completo, na pasta home ou de Downloads.
+
+- Exclui a pasta /sys/kernel/debug/dri/ do scan para evitar que o sistema crashe.
+
+- Atualiza o banco de dados do ClamAV antes de realizar um scan.
+
+- Move arquivos sinalizados para uma pasta na pasta home chamada Quarentena (cria automaticamente caso não exista).
+
+Adendo: os seguintes scripts utilizam do rofi para fornecer a interface gráfica e mandam notificações através do notify-send (futuramente as funcionalidades serão migradas para o quickshell para uma maior integração com o ambiente).
 
 • Bluetooth
 
@@ -57,13 +75,3 @@ Adendo: os scripts utilizam do rofi para fornecer a interface gráfica e mandam 
 • Powermenu
 
 - Um menu de sessão simples para sair da sessão, bloquear tela com o swaylock, suspender o computador, reiniciar ou desligar.
-
-• ClamAV
-
-- Pode realizar um scan completo, na pasta home ou de Downloads.
-
-- Exclui a pasta /sys/kernel/debug/dri/ do scan para evitar que o sistema crashe.
-
-- Atualiza o banco de dados do ClamAV antes de realizar um scan.
-
-- Move arquivos sinalizados para uma pasta na pasta home chamada Quarentena (cria automaticamente caso não exista).
