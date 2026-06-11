@@ -12,8 +12,6 @@ NOTA: As configs do SwayWM ainda não foram testadas no setup com o quickshell, 
 
 • Editor de texto: Neovim
 
-• App launcher: Rofi
-
 • Video player: MPV
 
 • Protetor de luz azul: Gammastep
