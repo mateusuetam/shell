@@ -1,5 +1,0 @@
-nvim/pack/plugins/opt/*
-nvim/pack/plugins/start/*
-
-!nvim/pack/plugins/opt/.gitkeep
-!nvim/pack/plugins/start/.gitkeep

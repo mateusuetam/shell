@@ -1,35 +1,51 @@
-# Meus Dots
-Ferramentas e interfaces para um ambiente de trabalho linux minimalista com uma shell desenvolvida através do toolkit quickshell.
-Pensado num fluxo de trabalho minimalista e com pouco consumo de recursos, essa repo tem a finalidade de entregar uma shell com o visual retro focado em utilidade, funcionalidade e produtividade.
+## ❄️ NixOS & Quickshell Configs
 
-NOTA: As configs do SwayWM e suporte a mais de um monitor ainda não foram testados no setup com o quickshell.
+Uma configuração **NixOS** modular, minimalista e focada em performance, gerenciada via **Flakes** e **Home-Manager**. O grande destaque é uma shell própria, com diversos recursos e totalmente customizada utilizando o toolkit **Quickshell**.
 
-📦 Pacotes utilizados
+> ⚠️ **AVISO:** O suporte a múltiplos monitores ainda não foi testado.
 
-• Window Manager: Niri
+---
 
-• Shell: Quickshell
+## 🚀 Filosofia do Projeto
 
-• Terminal: Alacritty
+Pensado para um fluxo de trabalho dinâmico, visualmente limpo e de baixo consumo de recursos, este repositório entrega um sistema pronto para uso produtivo. A arquitetura foi desenhada para que a adição ou remoção de novos usuários e compositores (Wayland) seja feita apenas declarando novos arquivos e alternando chaves booleanas.
 
-• Editor de texto: Neovim
+### ✨ Conteúdo
 
-• Video player: MPV
+* **Arquitetura Modular:** Crie e adicione novos perfis de usuários na pasta `users` e ative ou desative interfaces (ex: `Niri`, `Sway`, `Hyperland`...) declarando-as no arquivo `configuration.nix`.
 
-• Protetor de luz azul: Gammastep
+* **Shell Própria (Quickshell):** Interface escrita em QML com suporte a notificações, controle de volume/brilho, menu de aplicativos, facilidade de troca de temas (Gruvbox) e lockscreen integrada via PAM.
 
-🧩 Plugins do Neovim
+* **Otimizações de Kernel:** Ajustes para uma inicialização mais rápida, como a desativação de watchdogs e kernel customizado.
 
-• Telescope (nvim-telescope)
+---
 
-• Alpha (goolord)
+## 📁 Estrutura do Repositório
 
-• Plenary (nvim-lua)
+A árvore do projeto separa a base do sistema e as configurações específicas de usuário:
 
-📜 Script de instalação e sua função
+```text
+├── flake.nix                  # Entrada do ecossistema (Inputs/Outputs de pacotes)
+├── quickshell/                # Todo o código relacionado a shell customizada
+├── configurations/
+│   └── configuration.nix      # Configuração global do sistema NixOS
+└── users/
+    └── mateus/                # Dotfiles e home-manager do usuário
+        └── settings/          # Configurações pessoais de apps (Alacritty, Neovim, etc.)
+```
 
-• Executa um comando de instalação de pacotes que são necessários para dar compatbilidade com o ambiente de trabalho e fornece ferramentas extras de desenvolvimento (só instala os pacotes caso não estejam instalados).
+## 🧩 Recursos Internos da Quickshell
 
-• Cria links simbólicos entre as configurações e suas respectivas pastas esperadas em ".config".
+A pasta quickshell/modules gerencia diversos recursos direto no painel:
 
-• Clona a repo dos plugins do neovim.
+    • Monitor de Bateria & Gerenciamento de Energia (Upower)
+
+    • Controles de Volume e Microfone via PipeWire
+
+    • Módulo Bluetooth & NetworkManager integrado
+
+    • Controle de Mídia via MPRIS
+
+    • Gerenciador de Área de Transferência (Clipboard)
+
+    • Tela de Bloqueio customizada com prompt de senha integrado ao PAM

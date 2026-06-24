@@ -1,0 +1,37 @@
+{ config, lib, pkgs, ... }:
+
+{
+options.my.course.enable = lib.mkEnableOption "Ambiente de Desenvolvimento para o Curso";
+
+config = lib.mkIf config.my.course.enable {
+
+services.mysql = {
+enable = true;
+package = pkgs.mysql84;
+settings.mysqld = {
+bind-address = "127.0.0.1";
+port = 3306;
+mysqlx = 0;
+};
+};
+
+systemd.services.mysql.wantedBy = lib.mkForce [ ];
+
+home-manager.users.mateus = {
+home.packages = with pkgs; [
+jdk
+mysql-workbench
+(symlinkJoin {
+name = "netbeans-wrapped";
+paths = [ netbeans ];
+buildInputs = [ makeWrapper ];
+postBuild = ''
+wrapProgram $out/bin/netbeans \
+--set _JAVA_AWT_WM_NONREPARENTING 1 \
+--set _JAVA_OPTIONS "-Dawt.useSystemAAFontSettings=lcd"
+'';
+})
+];
+};
+};
+}
