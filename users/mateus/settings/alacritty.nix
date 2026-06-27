@@ -4,7 +4,7 @@
 programs.alacritty = {
 settings = {
 font = {
-size = 12.0;
+size = 10.0;
 normal = { family = "Monaspace Krypton NF"; };
 };
 colors = {
