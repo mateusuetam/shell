@@ -14,7 +14,6 @@ my.quickshell.enable = true;
 my.quickshell.development.enable = true;
 
 home.packages = with pkgs; [
-discord
 gimp
 spotify
 tree
