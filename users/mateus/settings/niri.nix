@@ -20,9 +20,6 @@ hot-corners {
 off
 }
 }
-output "eDP-1" {
-off
-}
 input {
 keyboard {
 xkb {
