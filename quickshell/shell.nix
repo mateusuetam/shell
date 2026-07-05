@@ -32,6 +32,9 @@ Service = {
 ExecStart = "${pkgs.quickshell}/bin/quickshell";
 Restart = "on-failure";
 KillMode = "process";
+Environment = [
+"QT_LOGGING_RULES=quickshell.dbus.properties=false"
+];
 };
 };
 })

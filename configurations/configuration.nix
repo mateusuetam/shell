@@ -12,7 +12,7 @@ systemd-boot.enable = true;
 efi.canTouchEfiVariables = true;
 timeout = 1;
 };
-kernelPackages = pkgs.linuxPackages_7_0;
+kernelPackages = pkgs.linuxPackages_latest;
 kernelParams = [
 "nowatchdog"
 "nmi_watchdog=0"
