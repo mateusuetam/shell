@@ -42,6 +42,10 @@ kernel.sysctl = {
 "kernel.dmesg_restrict" = 1;
 "kernel.kptr_restrict" = 2;
 };
+extraModprobeConfig = ''
+options rtw89_pci disable_aspm_l1=y disable_aspm_l1ss=y
+options rtw89_core disable_ps_mode=y
+'';
 };
 
 networking = {
@@ -79,7 +83,6 @@ options = "--delete-older-than 7d";
 
 hardware = {
 bluetooth.enable = true;
-cpu.amd.updateMicrocode = true;
 };
 
 security.rtkit.enable = true;
