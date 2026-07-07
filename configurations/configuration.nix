@@ -18,12 +18,19 @@ kernelParams = [
 "nmi_watchdog=0"
 ];
 blacklistedKernelModules = [
-"thunderbolt"
+# Controlador SATA AHCI
 "ahci" "libahci"
-"joydev" "mousedev"
+# Dispositivos de entrada legados/Apple
+"joydev" "mousedev" "mac_hid"
+# Recursos opcionais
+"thunderbolt" "bnep" "autofs4"
+# Watchdogs de hardware
 "sp5100_tco" "iTCO_wdt" "iTCO_vendor_support" "watchdog"
+# Protocolos/Sistemas de arquivos obsoletos e driver de teste
 "ax25" "netrom" "rose" "adfs" "affs" "befs" "cramfs" "efs" "freevxfs"
 "hfs" "hfsplus" "hpfs" "jfs" "minix" "nilfs2" "omfs" "qnx4" "qnx6" "sysv" "vivid"
+# Plataformas AMD SOF não utilizadas
+"snd_sof_amd_acp70" "snd_sof_amd_acp63" "snd_sof_amd_vangogh" "snd_sof_amd_rembrandt"
 ];
 kernel.sysctl = {
 "net.ipv4.conf.all.accept_redirects" = 0;
@@ -55,6 +62,18 @@ firewall.enable = true;
 networkmanager.enable = true;
 modemmanager.enable = false;
 };
+
+environment.etc."systemd/system-sleep/rfkill".source =
+pkgs.writeShellScript "rfkill-sleep" ''
+case "$1" in
+pre)
+${pkgs.util-linux}/bin/rfkill block all
+;;
+post)
+${pkgs.util-linux}/bin/rfkill unblock all
+;;
+esac
+'';
 
 systemd.services.NetworkManager-wait-online.enable = false;
 
