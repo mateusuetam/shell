@@ -3,7 +3,7 @@
 {
 imports = [
 ./hardware-configuration.nix
-../users/mateus/settings/course.nix
+../users/mateus/mateus.nix
 ];
 
 boot = {
@@ -16,21 +16,7 @@ kernelPackages = pkgs.linuxPackages_latest;
 kernelParams = [
 "nowatchdog"
 "nmi_watchdog=0"
-];
-blacklistedKernelModules = [
-# Controlador SATA AHCI
-"ahci" "libahci"
-# Dispositivos de entrada legados/Apple
-"joydev" "mousedev" "mac_hid"
-# Recursos opcionais
-"thunderbolt" "bnep" "autofs4"
-# Watchdogs de hardware
-"sp5100_tco" "iTCO_wdt" "iTCO_vendor_support" "watchdog"
-# Protocolos/Sistemas de arquivos obsoletos e driver de teste
-"ax25" "netrom" "rose" "adfs" "affs" "befs" "cramfs" "efs" "freevxfs"
-"hfs" "hfsplus" "hpfs" "jfs" "minix" "nilfs2" "omfs" "qnx4" "qnx6" "sysv" "vivid"
-# Plataformas AMD SOF não utilizadas
-"snd_sof_amd_acp70" "snd_sof_amd_acp63" "snd_sof_amd_vangogh" "snd_sof_amd_rembrandt"
+"module_blacklist=watchdog"
 ];
 kernel.sysctl = {
 "net.ipv4.conf.all.accept_redirects" = 0;
@@ -63,6 +49,8 @@ networkmanager.enable = true;
 modemmanager.enable = false;
 };
 
+systemd.services.NetworkManager-wait-online.enable = false;
+
 environment.etc."systemd/system-sleep/rfkill".source =
 pkgs.writeShellScript "rfkill-sleep" ''
 case "$1" in
@@ -74,8 +62,6 @@ ${pkgs.util-linux}/bin/rfkill unblock all
 ;;
 esac
 '';
-
-systemd.services.NetworkManager-wait-online.enable = false;
 
 console = {
 keyMap = "br-abnt2";
@@ -124,33 +110,7 @@ allowRiskyCriticalPowerAction = true;
 displayManager.enable = false;
 };
 
-xdg.portal.enable = true;
-
-fonts.packages = with pkgs; [
-noto-fonts
-noto-fonts-cjk-sans
-noto-fonts-color-emoji
-];
-
-nixpkgs.config.allowUnfree = true;
-programs.niri.enable = true;
-my.course.enable = true;
-
-users = {
-users.mateus = {
-isNormalUser = true;
-extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
-};
-};
-
-home-manager = {
-useGlobalPkgs = true;
-useUserPackages = true;
-backupFileExtension = "backup";
-users = {
-mateus = ../users/mateus/user.nix;
-};
-};
+my.users.mateus.enable = true;
 
 documentation = {
 man.enable = true;

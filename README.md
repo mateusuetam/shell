@@ -1,6 +1,6 @@
 ## ❄️ NixOS & Quickshell Configs
 
-Uma configuração **NixOS** modular, minimalista e focada em performance, gerenciada via **Flakes** e **Home-Manager**. O grande destaque é uma shell própria, com diversos recursos e totalmente customizada utilizando o toolkit **Quickshell**.
+Uma configuração **NixOS** modular, minimalista e focada em performance, gerenciada via **Flakes**. O grande destaque é uma shell própria, com diversos recursos e totalmente customizada utilizando o toolkit **Quickshell**.
 
 > ⚠️ **AVISO:** O suporte a múltiplos monitores ainda não foi testado.
 
@@ -12,11 +12,11 @@ Pensado para um fluxo de trabalho dinâmico, visualmente limpo e de baixo consum
 
 ### ✨ Conteúdo
 
-* **Arquitetura Modular:** Crie e adicione novos perfis de usuários na pasta `users` e ative ou desative interfaces (ex: `Niri`, `Sway`, `Hyperland`...) declarando-as no arquivo `configuration.nix`.
+* **Arquitetura Modular:** Crie e adicione novos perfis de usuários na pasta `users` e ative ou desative interfaces (ex: `Niri`, `Sway`, `Hyperland`...) declarando-as no arquivo de seu respectivo usuário.
 
 * **Shell Própria (Quickshell):** Interface escrita em QML com suporte a notificações com cores de bordas dinâmicas e sincronizadas com a barra principal, controle de volume/brilho, integração com o gammastep com a possibilidade de seleção de diferentes valores de temperatura da cor da tela, menus de aplicativos, sessão, clipboard, bluetooth e de network, facilidade de troca de cores e fontes através do arquivo de registro (default: Gruvbox e Krypton) e lockscreen integrada via PAM.
 
-* **Otimizações de Kernel:** Ajustes para uma inicialização mais rápida, como a desativação de watchdogs e kernel customizado.
+* **Modificação de Kernel:** Ajustes para uma inicialização e reboot mais rápidos com a desativação de watchdogs.
 
 ---
 
@@ -30,7 +30,8 @@ A árvore do projeto separa a base do sistema e as configurações específicas 
 ├── configurations/
 │   └── configuration.nix      # Configuração global do sistema NixOS
 └── users/
-    └── mateus/                # Dotfiles e home-manager do usuário
+    └── mateus/                # Dotfiles e configurações do usuário
+        └── bundles/           # Pacotes de aplicativos e script de criação de symlinks
         └── settings/          # Configurações pessoais de apps (Alacritty, Neovim, etc.)
 ```
 

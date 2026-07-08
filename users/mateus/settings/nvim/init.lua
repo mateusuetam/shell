@@ -1,17 +1,3 @@
-{ pkgs, ... }:
-
-{
-programs.neovim = {
-enable = true;
-defaultEditor = true;
-
-plugins = with pkgs.vimPlugins; [
-alpha-nvim
-plenary-nvim
-telescope-nvim
-];
-
-initLua = ''
 -- neovim
 vim.api.nvim_set_hl(0,"StatusLine",{bg="none"})
 vim.api.nvim_set_hl(0,"StatusLineNC",{bg="none"})
@@ -124,6 +110,3 @@ hidden=true,
 })
 local builtin = require('telescope.builtin')
 vim.keymap.set('n','<leader>f',builtin.find_files)
-'';
-};
-}

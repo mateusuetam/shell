@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-options.my.course.enable = lib.mkEnableOption "Ambiente de Desenvolvimento para o Curso";
+options.my.course.enable = lib.mkEnableOption "Bundle para o curso";
 
 config = lib.mkIf config.my.course.enable {
 
@@ -17,14 +17,14 @@ mysqlx = 0;
 
 systemd.services.mysql.wantedBy = lib.mkForce [ ];
 
-home-manager.users.mateus = {
-home.packages = with pkgs; [
+environment.systemPackages = with pkgs; [
 jdk
 mysql-workbench
+
 (symlinkJoin {
 name = "netbeans-wrapped";
 paths = [ netbeans ];
-buildInputs = [ makeWrapper ];
+nativeBuildInputs = [ makeWrapper ];
 postBuild = ''
 wrapProgram $out/bin/netbeans \
 --set _JAVA_AWT_WM_NONREPARENTING 1 \
@@ -32,6 +32,5 @@ wrapProgram $out/bin/netbeans \
 '';
 })
 ];
-};
 };
 }

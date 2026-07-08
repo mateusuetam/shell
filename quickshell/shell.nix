@@ -8,10 +8,10 @@ development.enable = lib.mkEnableOption "Ferramentas de Desenvolvimento para a Q
 
 config = lib.mkMerge [
 (lib.mkIf config.my.quickshell.enable {
-xdg.configFile."quickshell".source = ./shell;
 
-home.packages = with pkgs; [
+environment.systemPackages = with pkgs; [
 brightnessctl
+cliphist
 gammastep
 libnotify
 monaspace
@@ -19,28 +19,26 @@ quickshell
 wl-clipboard
 ];
 
-services.cliphist.enable = true;
-
 systemd.user.services.quickshell = {
-Unit = {
-Description = "Quickshell Wayland UI";
-PartOf = [ "graphical-session.target" ];
-After = [ "graphical-session.target" ];
+description = "Quickshell Wayland UI";
+partOf = [ "graphical-session.target" ];
+after = [ "graphical-session.target" ];
+wantedBy = [ "graphical-session.target" ];
+
+environment = {
+QT_LOGGING_RULES = "quickshell.dbus.properties=false";
 };
-Install = { WantedBy = [ "graphical-session.target" ]; };
-Service = {
+
+serviceConfig = {
 ExecStart = "${pkgs.quickshell}/bin/quickshell";
 Restart = "on-failure";
 KillMode = "process";
-Environment = [
-"QT_LOGGING_RULES=quickshell.dbus.properties=false"
-];
 };
 };
 })
 
 (lib.mkIf config.my.quickshell.development.enable {
-home.packages = with pkgs; [
+environment.systemPackages = with pkgs; [
 qtcreator
 qt6.qtwayland
 
