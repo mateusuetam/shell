@@ -4,6 +4,7 @@
 imports = [
 ./bundles/applications.nix
 ./bundles/proprietaryapps.nix
+./bundles/browser.nix
 ./bundles/course.nix
 ./bundles/neovim.nix
 ./bundles/desktop.nix
@@ -25,6 +26,7 @@ extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
 my = {
 applications.enable = true;
 proprietaryapps.enable = true;
+browser.enable = true;
 course.enable = true;
 neovim.enable = true;
 desktop.enable = true;
