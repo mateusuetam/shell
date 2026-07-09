@@ -3,7 +3,6 @@
 {
 imports = [
 ./bundles/applications.nix
-./bundles/proprietaryapps.nix
 ./bundles/browser.nix
 ./bundles/course.nix
 ./bundles/neovim.nix
@@ -24,8 +23,10 @@ extraGroups = [ "wheel" "networkmanager" "video" "audio" ];
 };
 
 my = {
-applications.enable = true;
-proprietaryapps.enable = true;
+applications = {
+opensource.enable = true;
+proprietary.enable = true;
+};
 browser.enable = true;
 course.enable = true;
 neovim.enable = true;
@@ -36,8 +37,8 @@ homeDir = "/home/mateus";
 owner = "mateus:users";
 };
 quickshell = {
-enable = true;
-development.enable = true;
+shell.enable = true;
+devmode.enable = true;
 };
 };
 };

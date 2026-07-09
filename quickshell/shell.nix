@@ -2,12 +2,13 @@
 
 {
 options.my.quickshell = {
-enable = lib.mkEnableOption "Enable Quickshell UI";
-development.enable = lib.mkEnableOption "Ferramentas de Desenvolvimento para a Quickshell";
+shell.enable = lib.mkEnableOption "Enable Quickshell UI";
+devmode.enable = lib.mkEnableOption "Ferramentas de Desenvolvimento para a Quickshell";
 };
 
 config = lib.mkMerge [
-(lib.mkIf config.my.quickshell.enable {
+
+(lib.mkIf config.my.quickshell.shell.enable {
 
 environment.systemPackages = with pkgs; [
 brightnessctl
@@ -37,7 +38,8 @@ KillMode = "process";
 };
 })
 
-(lib.mkIf config.my.quickshell.development.enable {
+(lib.mkIf config.my.quickshell.devmode.enable {
+
 environment.systemPackages = with pkgs; [
 qtcreator
 qt6.qtwayland
@@ -55,5 +57,6 @@ wrapProgram $out/bin/qmllint \
 })
 ];
 })
+
 ];
 }
