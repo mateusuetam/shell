@@ -30,6 +30,65 @@ vim.keymap.set('n', '<leader>a', ':%left<CR>')
 vim.keymap.set('n', '<leader>s', '<cmd>global/^$/delete<CR>')
 vim.keymap.set('n','<Esc>','<cmd>nohlsearch<CR>')
 
+-- telescope
+local telescope_loaded = false
+
+local function telescope_setup()
+if telescope_loaded then
+return
+end
+
+vim.cmd("packadd plenary.nvim")
+vim.cmd("packadd telescope.nvim")
+
+require("telescope").setup({
+defaults = {
+file_ignore_patterns = {
+"%.cache",
+"%.config/GIMP",
+"%.config/dconf",
+"%.config/discord",
+"%.config/gtk%-3%.0",
+"%.config/mozilla",
+"nvim/pack/.*",
+"%.config/mprocps",
+"%.config/pulse",
+"%.config/unity3d",
+"%.java",
+"%.local",
+"%.mysql",
+"%.netbeans",
+"%.pki",
+"%.steam",
+"netbeans",
+"node_modules",
+"%.git/",
+"target/",
+"dist/"
+},
+},
+pickers = {
+find_files = {
+hidden = true,
+},
+},
+})
+
+telescope_loaded = true
+end
+
+function telescope_find_files()
+telescope_setup()
+require("telescope.builtin").find_files()
+end
+
+function telescope_oldfiles()
+telescope_setup()
+require("telescope.builtin").oldfiles()
+end
+
+vim.keymap.set('n', '<leader>f', telescope_find_files)
+
 -- alpha
 local alpha=require("alpha")
 local dashboard=require("alpha.themes.dashboard")
@@ -67,46 +126,9 @@ dashboard.section.header.val={
 }
 dashboard.section.buttons.val={
 dashboard.button("n"," Novo",":ene <BAR> startinsert <CR>"),
-dashboard.button("f","󰱽 Procurar",":Telescope find_files <CR>"),
-dashboard.button("r"," Recentes",":Telescope oldfiles<CR>"),
+dashboard.button("f","󰱽 Procurar",":lua telescope_find_files()<CR>"),
+dashboard.button("r"," Recentes",":lua telescope_oldfiles()<CR>"),
 dashboard.button("e","󰙅 Explorar",":Ex <CR>"),
 dashboard.button("q","󰅚 Sair",":qa <CR>")
 }
 alpha.setup(dashboard.config)
-
--- telescope
-local telescope=require("telescope")
-telescope.setup({
-defaults={
-file_ignore_patterns={
-"%.cache",
-"%.config/GIMP",
-"%.config/dconf",
-"%.config/discord",
-"%.config/gtk%-3%.0",
-"%.config/mozilla",
-"nvim/pack/.*",
-"%.config/mprocps",
-"%.config/pulse",
-"%.config/unity3d",
-"%.java",
-"%.local",
-"%.mysql",
-"%.netbeans",
-"%.pki",
-"%.steam",
-"netbeans",
-"node_modules",
-"%.git/",
-"target/",
-"dist/"
-},
-},
-pickers={
-find_files={
-hidden=true,
-},
-}
-})
-local builtin = require('telescope.builtin')
-vim.keymap.set('n','<leader>f',builtin.find_files)

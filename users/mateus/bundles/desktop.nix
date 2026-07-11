@@ -15,7 +15,14 @@ noto-fonts-color-emoji
 ];
 
 programs = {
-bash.enable = true;
+bash = {
+enable = true;
+interactiveShellInit = ''
+if [ -f ~/.bashrc ]; then
+. ~/.bashrc
+fi
+'';
+};
 git.enable = true;
 niri.enable = true;
 };
