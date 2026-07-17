@@ -15,7 +15,6 @@ xdg.portal.enable = true;
 environment.defaultPackages = lib.mkForce [];
 
 fonts.packages = with pkgs; [
-monaspace
 noto-fonts
 noto-fonts-cjk-sans
 noto-fonts-color-emoji

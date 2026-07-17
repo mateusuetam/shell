@@ -2,9 +2,6 @@ hotkey-overlay {
 skip-at-startup
 }
 prefer-no-csd
-animations {
-off
-}
 gestures {
 hot-corners {
 off
@@ -49,8 +46,13 @@ bottom 20
 }
 }
 window-rule {
+geometry-corner-radius 6
 clip-to-geometry true
 open-maximized true
+}
+layer-rule {
+match namespace="^wallpaper-blur$"
+place-within-backdrop true
 }
 binds {
 Mod+Return { spawn "alacritty"; }
